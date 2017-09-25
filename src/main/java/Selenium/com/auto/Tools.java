@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class Tools {
 	/*
@@ -12,9 +13,11 @@ public class Tools {
 	 */
 	public static WebDriver initIE(WebDriver dr) {
 		String key = "webdriver.ie.driver";
-		String value = "./../tool/IEDriverServer_64.exe";
+		String value = "./tool/ie.exe";
 		System.setProperty(key, value);
-		dr = new InternetExplorerDriver();
+		DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
+        ieCapabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
+		dr = new InternetExplorerDriver(ieCapabilities);
 		dr.manage().window().maximize();
 		dr.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return dr;

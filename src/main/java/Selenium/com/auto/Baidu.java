@@ -12,9 +12,14 @@ public class Baidu {
 		
 
 		WebDriver driver =null;
-//		Tools.initIE(driver);
-		Tools.initChrome(driver);
+		driver = Tools.initIE(driver);
+//		Tools.initChrome(driver);
 		System.out.println("-------------2------------Hello");
+		try{
+		driver.get("http://www.baidu.com/");
+		} catch (Exception e){
+			e.printStackTrace();
+		}
 		
 		driver.navigate().to("http://www.baidu.com/");
 		driver.manage().window().maximize();
